@@ -98,11 +98,11 @@ gulp.task('templates', function () {
 gulp.task('oauth', function () {
   mkdirp(dist);
   return gulp.src('')
-    .pipe(
-      shell([
-        '[ -f oauth.json ] && echo "Using existing oauth.json." || curl "https://raw.githubusercontent.com/prose/prose/gh-pages/oauth.json" > oauth.json'
-      ])
-    );
+ //   .pipe(
+//      shell([
+ //       '[ -f oauth.json ] && echo "Using existing oauth.json." || curl "https://raw.githubusercontent.com/prose/prose/gh-pages/oauth.json" > oauth.json'
+ //     ])
+    //);
 });
 
 // Build tests, then concatenate with vendor scripts
@@ -126,11 +126,11 @@ gulp.task('build-tests', ['templates', 'oauth'], function() {
 gulp.task('build-app', ['templates', 'oauth'], function() {
   var app = browserify({
     noParse: [require.resolve('handsontable/dist/handsontable.full')]
-  })
-  .add('./app/boot.js')
-  .bundle()
-  .pipe(source('app.js'))
-  .pipe(buffer());
+  }).on('error', function(e) { console.log(e) })
+  .add('./app/boot.js').on('error', function(e) { console.log(e) })
+  .bundle().on('error', function(e) { console.log(e) })
+  .pipe(source('app.js')).on('error', function(e) { console.log(e) })
+  .pipe(buffer()).on('error', function(e) { console.log(e) })
 
   return merge2(gulp.src(paths.vendorScripts), app)
   .pipe(concat('prose.js'))
