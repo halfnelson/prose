@@ -1,6 +1,6 @@
 {
   "api": "https://api.github.com",
   "site": "https://github.com",
-  "clientId": "b1d8409acad75bac5993",
-  "gatekeeperUrl": "http://localhost:9999"
+  "clientId": "53a0669d7d91bd4d2c98",
+  "gatekeeperUrl": "https://auth.pershouse.id.au"
 }
